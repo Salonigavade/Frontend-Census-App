@@ -1,61 +1,116 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Container/Login.css';
 
 function Login() {
 
+    const [userId, setUserId] = useState('');
+    const [emailId, setEmailId] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [password, setPassword] = useState('');
+    const [reEnterPassword, setReEnterPassword] = useState('');
+    const [role, setRole] = useState('');
+    const [user, setUser] = useState({
+        userId:'',
+        emailId:'',
+        mobile:'',
+        password:'',
+        role:''
+    });
+
+
 const onClickRegister = ()=>{
-    document.getElementById('container').classList.add("right-panel-active");
+    document.getElementById('login-container').classList.add("right-panel-active");
 
 }
 const onClickLogin = ()=>{
-    document.getElementById('container').classList.remove("right-panel-active");
+    document.getElementById('login-container').classList.remove("right-panel-active");
+
+}
+
+function onChangeUserId(e){
+    const newUserId={userId:e.target.value};
+    setUserId(newUserId);
+}
+function onChangeEmailId(e){
+    const newEmailId={emailId:e.target.value};
+    setEmailId(newEmailId);
+}
+function onChangeMobileNo(e){
+    const newMobileNo={mobile:e.target.value}
+    setMobile(newMobileNo);
+}
+function onChangePassword(e){
+    const newPassword={password:e.target.value}
+    setPassword(newPassword);
+}
+function onChangeReEnterPassword(e){
+    const newReEnterPassword={reEnterPassword:e.target.value}
+    setReEnterPassword(newReEnterPassword)
+}
+function OnRoleChange(e){
+    const newRole={role:e.target.value};
+    setRole(newRole);
+}
+function OnRoleChange1(e){
+    const newRole={role:e.target.value};
+    setRole(newRole);
+}
+
+function onClickRegisterBtn(e){
+    e.preventDefault();
+    setUser({
+    });
 
 }
 
 return (
         <>
-            <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
-                <div className="container" id="container">
+            <div className="container login-container" id="login-container">
                 <div className="form-container sign-up-container">
                     <form action="#">
-                        <h1>Create Account</h1>
-                        <div className="social-container">
-                            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-                        </div>
-                        <span>or use your email for registration</span>
-                        <input type="text" placeholder="Adhar Card No" />
-                        <input type="email" placeholder="Email" />
-                        <input type="tel" placeholder="Mobile Number"/>
-                        <input type="password" placeholder="Password" />
-                        <input type="password" placeholder="Re-Enter Password" />
-                        <div className="radioGroup">
-                    <div className="radiobtn ">
-                        <label>
-                        <input
-                            type="radio"
-                            value="Admin"
-                            checked={this.state.role === "Admin"}
-                            onChange={this.OnRoleChange}
-                        />
-                        Admin
-                        </label>
-                    </div>
+                        <h1>Register</h1>
+                        <input type="text" placeholder="Adhar Card No" name="userId" value={userId}
+                         onChange={onChangeUserId}
 
-                    <div className="radiobtn ">
-                        <label>
-                        <input
-                            type="radio"
-                            value="User"
-                            checked={this.state.role === "User"}
-                            onChange={this.OnRoleChange1}
+                         />
+                        <input type="email" placeholder="Email" name="emailId" value={emailId}
+                             onChange={onChangeEmailId}
                         />
-                        User
-                        </label>
-                    </div>
+                        <input type="tel" placeholder="Mobile Number" name="mobile" value={mobile}
+                             onChange={onChangeMobileNo}
+                        />
+                        <input type="password" placeholder="Password" name="password" value={password}
+                             onChange={onChangePassword}
+                        />
+                        <input type="password" placeholder="Re-Enter Password" name="reEnterPassword" value={reEnterPassword}
+                             onChange={onChangeReEnterPassword}
+                        />
+                        <div className="radioGroup d-flex">
+                            <div className="radiobtn mr-5 ">
+                                <label>
+                                <input
+                                    type="radio"
+                                    value="Admin"
+                                    checked={role === "Admin"}
+                                    onChange={OnRoleChange}
+                                />
+                                Admin
+                                </label>
+                            </div>
+
+                            <div className="radiobtn ml-3 ">
+                                <label>
+                                <input
+                                    type="radio"
+                                    value="User"
+                                    checked={role === "User"}
+                                    onChange={OnRoleChange1}
+                                />
+                                User
+                                </label>
+                            </div>
                    </div> 
-                        <button >Sign Up</button>
+                        <button onClick={onClickRegisterBtn}>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
