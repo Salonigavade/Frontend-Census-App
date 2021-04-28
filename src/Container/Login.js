@@ -1,0 +1,97 @@
+import React from 'react';
+import '../Container/Login.css';
+
+function Login() {
+
+const onClickRegister = ()=>{
+    document.getElementById('container').classList.add("right-panel-active");
+
+}
+const onClickLogin = ()=>{
+    document.getElementById('container').classList.remove("right-panel-active");
+
+}
+
+return (
+        <>
+            <h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
+                <div className="container" id="container">
+                <div className="form-container sign-up-container">
+                    <form action="#">
+                        <h1>Create Account</h1>
+                        <div className="social-container">
+                            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
+                            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
+                            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>or use your email for registration</span>
+                        <input type="text" placeholder="Adhar Card No" />
+                        <input type="email" placeholder="Email" />
+                        <input type="tel" placeholder="Mobile Number"/>
+                        <input type="password" placeholder="Password" />
+                        <input type="password" placeholder="Re-Enter Password" />
+                        <div className="radioGroup">
+                    <div className="radiobtn ">
+                        <label>
+                        <input
+                            type="radio"
+                            value="Admin"
+                            checked={this.state.role === "Admin"}
+                            onChange={this.OnRoleChange}
+                        />
+                        Admin
+                        </label>
+                    </div>
+
+                    <div className="radiobtn ">
+                        <label>
+                        <input
+                            type="radio"
+                            value="User"
+                            checked={this.state.role === "User"}
+                            onChange={this.OnRoleChange1}
+                        />
+                        User
+                        </label>
+                    </div>
+                   </div> 
+                        <button >Sign Up</button>
+                    </form>
+                </div>
+                <div className="form-container sign-in-container">
+                    <form action="#">
+                        <h1>Sign in</h1>
+                        <div className="social-container">
+                            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
+                            <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
+                            <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>or use your account</span>
+                        <input type="email" placeholder="Email" />
+                        <input type="password" placeholder="Password" />
+                        <a href="#">Forgot your password?</a>
+                        <button>Sign In</button>
+                    </form>
+                </div>
+                <div className="overlay-container">
+                    <div className="overlay">
+                        <div className="overlay-panel overlay-left">
+                            <h1>Welcome Back!</h1>
+                            <p>To keep connected with us please login with your personal info</p>
+                            <button className="ghost" id="signIn" onClick={()=>onClickLogin()}>Sign In</button>
+                        </div>
+                        <div className="overlay-panel overlay-right">
+                            <h1>Hello, Friend!</h1>
+                            <p>Enter your personal details and start journey with us</p>
+                            <button className="ghost" id="signUp" onClick={()=>onClickRegister()}>Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+        </>
+    );
+}
+
+export default Login;
