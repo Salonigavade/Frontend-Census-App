@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../Container/Login.css";
-
+import UserService from "../Service/UserService";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +12,9 @@ class LoginPage extends Component {
       password: "",
       reEnterPassword: "",
       role: "",
+      loginUserId: "",
+      loginPassword: "",
+      loginRole: "",
     };
 
     this.onChangeUserId = this.onChangeUserId.bind(this);
@@ -21,10 +24,15 @@ class LoginPage extends Component {
     this.onChangeReEnterPassword = this.onChangeReEnterPassword.bind(this);
     this.OnRoleChange = this.OnRoleChange.bind(this);
     this.OnRoleChange1 = this.OnRoleChange1.bind(this);
+    this.onChangeLoginPassword = this.onChangeLoginPassword.bind(this);
+    this.onChangeLoginUserId = this.onChangeLoginUserId.bind(this);
+    this.OnLoginRoleChange = this.OnLoginRoleChange.bind(this);
+    this.OnLoginRoleChange1 = this.OnLoginRoleChange.bind(this);
     this.onRegisterClick = this.onRegisterClick.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
   }
 
+  //Register
   onChangeUserId = (e) => {
     this.setState({
       userId: e.target.value,
@@ -82,36 +90,81 @@ class LoginPage extends Component {
   //Login
   onChangeLoginPassword = (e) => {
     this.setState({
-      password: e.target.value,
+      loginPassword: e.target.value,
     });
   };
 
   OnLoginRoleChange = (e) => {
     this.setState({
-      role: e.target.value,
+      loginRole: e.target.value,
     });
   };
 
   OnLoginRoleChange1 = (e) => {
     this.setState({
-      role: e.target.value,
+      loginRole: e.target.value,
     });
   };
 
   onChangeLoginUserId = (e) => {
     this.setState({
-      userId: e.target.value,
+      loginUserId: e.target.value,
     });
   };
 
   //Submit
 
-  onRegisterClick = () => {
-    alert("sucess");
+  onRegisterClick = (e) => {
+    e.preventDefault();
+    let user = {
+      userId: this.state.userId,
+      emailId: this.state.emailId,
+      mobile: this.state.mobile,
+      password: this.state.password,
+      role: this.state.role,
+    };
+
+    this.setState({
+      reEnterPassword: this.state.reEnterPassword,
+    });
+
+    if (this.state.reEnterPassword === user.password) {
+      UserService.registerUser(user)
+        .then((res) => {
+          alert("Register Successful");
+        })
+        .catch((res) => {
+          alert("Incorrect Credentials :(");
+        });
+    } else {
+      alert("password and Re-enter password must be same --");
+    }
   };
 
-  onLoginClick = () => {
-    alert("sucess");
+  onLoginClick = (e) => {
+    e.preventDefault();
+    let login = {
+      userId: this.state.loginUserId,
+      password: this.state.loginPassword,
+      role: this.state.loginRole,
+    };
+
+    UserService.signIn(login)
+      .then((res) => {
+        alert("Login Successful");
+        let l = res.data;
+        console.log(l);
+        if (login.role === "Admin") {
+          this.props.history.push(`/adminPortal`);
+        } else if (login.role === "User") {
+          this.props.history.push(`/userPortal/${this.state.userId}`);
+        }
+
+        console.log(JSON.stringify(login));
+      })
+      .catch((res) => {
+        alert("Incorrect Credentials :(");
+      });
   };
 
   render() {
@@ -192,7 +245,7 @@ class LoginPage extends Component {
             </form>
           </div>
           <div className="form-container sign-in-container">
-            <form onSubmit={this.onLoginClick}>
+            <form>
               <h1>Sign in</h1>
               <div className="social-container">
                 <a href="#" className="social">
@@ -211,7 +264,7 @@ class LoginPage extends Component {
                 placeholder="Adhar Card No"
                 name="userId"
                 onChange={this.onChangeLoginUserId}
-                value={this.state.userId}
+                value={this.state.loginUserId}
                 placeholder="Enter Adhar No"
               />
 
@@ -219,7 +272,7 @@ class LoginPage extends Component {
                 type="password"
                 placeholder="Password"
                 name="password"
-                value={this.state.password}
+                value={this.state.loginPassword}
                 onChange={this.onChangeLoginPassword}
               />
 
@@ -229,7 +282,7 @@ class LoginPage extends Component {
                     <input
                       type="radio"
                       value="Admin"
-                      checked={this.state.role === "Admin"}
+                      checked={this.state.loginRole === "Admin"}
                       onChange={this.OnLoginRoleChange}
                     />
                     Admin
@@ -241,7 +294,7 @@ class LoginPage extends Component {
                     <input
                       type="radio"
                       value="User"
-                      checked={this.state.role === "User"}
+                      checked={this.state.loginRole === "User"}
                       onChange={this.OnLoginRoleChange1}
                     />
                     User
@@ -250,7 +303,7 @@ class LoginPage extends Component {
               </div>
               <a href="#">Forgot your password?</a>
 
-              <button>Sign In</button>
+              <button onClick={this.onLoginClick}>Sign In</button>
             </form>
           </div>
 
