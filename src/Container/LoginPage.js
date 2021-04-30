@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../Container/Login.css";
 import UserService from "../Service/UserService";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -159,7 +159,7 @@ class LoginPage extends Component {
         if (login.role === "Admin") {
           this.props.history.push(`/adminPortal`);
         } else if (login.role === "User") {
-          this.props.history.push(`/userPortal/${login.userId}`);
+          this.props.history.push(`/members-by-userId/${login.userId}`);
         }
 
         console.log(JSON.stringify(login));
@@ -304,7 +304,7 @@ class LoginPage extends Component {
                 </div>
               </div>
               <Link to="/forget-password">
-                  <a href="#">Forgot your password?</a>
+                <a href="#">Forgot your password?</a>
               </Link>
               <button onClick={this.onLoginClick}>Sign In</button>
             </form>

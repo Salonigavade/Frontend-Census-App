@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserService from "../Service/UserService";
 import "../Container/AdminPortal.css";
-
+import { Link } from "react-router-dom";
 class AdminPortal extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +46,9 @@ class AdminPortal extends Component {
         <div className="row top">
           <div className="col-md-5 d-flex ">
             <div className="home ml-4 mr-2">
-              <h3>Home</h3>
+              <Link to="/">
+                <button className="btn-logout ">Log out</button>
+              </Link>
             </div>
             <div className="contact ml-4 mr-2">
               <h3>Contact</h3>
@@ -66,7 +68,7 @@ class AdminPortal extends Component {
                 onChange={this.changeSearchText}
               />
               <button
-                class="btn bg-danger btn-rounded"
+                class="btn  btn-primary btn-rounded btn-display"
                 type="submit"
                 onClick={() => this.SearchUserById(this.state.searchText)}
               >
@@ -76,7 +78,7 @@ class AdminPortal extends Component {
           </div>
           <div className="col-md-2">
             <button
-              className="btn btn-sm-1 btn-info mt-4"
+              className="btn btn-primary mt-4 btn-display"
               onClick={this.showAllMemberClick}
             >
               Show All
@@ -84,7 +86,7 @@ class AdminPortal extends Component {
           </div>
         </div>
         <div>
-          <h2 className="text-capitalize text-center bg-info">Admin portal</h2>
+          <h1 className="text-capitalize text-center title">Admin portal</h1>
         </div>
         {this.state.user
           .filter((ufilter) => ufilter.role === "User")
@@ -107,7 +109,7 @@ class AdminPortal extends Component {
                 </div>
                 <hr />
                 <button
-                  className="btn btn-primary ml-5"
+                  className="btn btn-primary ml-5 btn-display"
                   onClick={() => this.onClickGetUser(u.userId)}
                 >
                   show Details

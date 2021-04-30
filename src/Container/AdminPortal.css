@@ -2,7 +2,7 @@
   /* display: block; */
   display: inline-block;
   width: 300px;
-  height: 230px;
+  height: 250px;
   margin: 50px 60px;
   border: 2px solid;
   box-shadow: 2px black;
@@ -86,6 +86,7 @@ h3 {
 }
 .searchbar {
   width: 300px !important;
+  border: 2px solid;
   /* margin-left: -110px; */
 }
 
@@ -96,4 +97,33 @@ h3 {
   flex-wrap: wrap;
   /* margin-right: -15px; */
   /* margin-left: -15px; */
+}
+.title {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  height: 65px;
+  padding-top: 3px;
+  color: white;
+  font-family: emoji;
+  border: 4px groove black;
+}
+
+.btn-display {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+  font-family: emoji;
+}
+
+.btn-display:hover {
+  color: black;
+  border: 2px solid;
+}
+
+.btn-logout {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+  font-family: emoji;
+  margin-top: 20px;
+}
+.btn-logout:hover {
+  color: black;
 }

@@ -1,7 +1,7 @@
 .card.usercard {
   display: block;
   margin: 100px auto;
-  height: 300px;
+  height: 350px;
   width: 350px;
   padding: 25px;
 }
@@ -14,4 +14,18 @@
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 26px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-display {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  color: white;
+  font-family: emoji;
+}
+
+.btn-display:hover {
+  color: black;
+  border: 2px solid;
+}
+.backbtn {
+  margin-left: 85px !important;
 }

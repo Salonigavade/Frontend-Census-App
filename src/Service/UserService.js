@@ -11,8 +11,12 @@ class UserService {
     return axios.post(BASE_URL + "process/login", login);
   }
 
-  forgetPassword(user){
-      return axios.post(BASE_URL + "process/forget-password", user);
+  logout(logout) {
+    return axios.post(BASE_URL + "process/logout", logout);
+  }
+
+  forgetPassword(user) {
+    return axios.post(BASE_URL + "process/forget-password", user);
   }
 
   showUser() {
