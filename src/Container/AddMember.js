@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 class AddMember extends Component {
+
     constructor(props) {
         super(props);
     
@@ -364,6 +365,7 @@ class AddMember extends Component {
             </>
         );
     }
+
 }
 
 export default AddMember;
