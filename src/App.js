@@ -4,9 +4,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginPage from "./Container/LoginPage";
 import ForgetPassword from "./Container/ForgetPassword";
 import AdminPortal from "./Container/AdminPortal";
+import UserPortal from "./Container/UserPortal";
+
 import FamilyMemberList from "./Container/FamilyMemberList";
 import MemberList from "./Container/MemberList";
 import UserById from "./Container/UserById";
+
 
 function App() {
   return (
@@ -14,8 +17,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact={true} component={LoginPage} />
-          <Route path="/add-member" exact={true} component={AddMember} />
+          <Route path="/forget-password" exact={true} component={ForgetPassword} />
+          <Route path="/add-member/:userId" exact={true} component={AddMember} />
           <Route path="/adminPortal" exact={true} component={AdminPortal} />
+
+          <Route path="/userPortal/:userId" exact={true} component={UserPortal} />
+
 
           <Route
             path="/members-by-userId/:userId"
@@ -29,6 +36,7 @@ function App() {
             exact={true}
             component={UserById}
           />
+
         </Switch>
       </BrowserRouter>
     </>

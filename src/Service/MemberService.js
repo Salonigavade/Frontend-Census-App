@@ -3,6 +3,11 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/springfox/api/member/";
 class MemberService {
+  
+  addMember(userId,member){
+        return axios.post(BASE_URL+ 'member/add-member/'+userId,member);
+    }
+  
   getMembersByUserId(userId) {
     return axios.get(BASE_URL + "memberByUserId/" + userId);
   }
@@ -32,6 +37,7 @@ class MemberService {
   getAllMembers() {
     return axios.get(BASE_URL + "memberInfo");
   }
+
 }
 
 export default new MemberService();
