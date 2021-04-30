@@ -1,59 +1,83 @@
 import React, { Component } from "react";
 import MemberService from "../Service/MemberService";
+import "../Container/SearchByAge.css";
 import { Link } from "react-router-dom";
-import UserService from "../Service/UserService";
-
-class FamilyMemberList extends Component {
+class SearchByAge extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      start: "",
+      end: "",
       members: [],
-      userId: this.props.match.params.userId,
     };
-    this.logOut = this.logOut.bind(this);
+    this.ChangeStartAge = this.ChangeStartAge.bind(this);
+    this.ChangeEndAge = this.ChangeEndAge.bind(this);
+    this.SearchByAge = this.SearchByAge.bind(this);
   }
-  componentDidMount() {
-    MemberService.getMembersByUserId(this.state.userId).then((response) => {
-      this.setState({ members: response.data });
-      console.log(this.state.members);
-    });
-  }
-  logOut = (e) => {
+  y;
+
+  //   componentDidMount() {
+
+  //   }
+  SearchByAge = (e) => {
     e.preventDefault();
-    let logout = {
-      userId: this.state.userId,
-    };
-    UserService.logout(logout).then((res) => {
-      alert("Log Out Successfully");
-      this.props.history.push("/");
+    MemberService.getMembersBetAges(this.state.start, this.state.end).then(
+      (response) => {
+        this.setState({ members: response.data });
+        console.log(this.state.members);
+      }
+    );
+  };
+  ChangeStartAge = (e) => {
+    this.setState({
+      start: e.target.value,
     });
   };
+  ChangeEndAge = (e) => {
+    this.setState({
+      end: e.target.value,
+    });
+  };
+
   render() {
     return (
       <>
-        <h1 className="text-center text-capitalize title">Family Details</h1>
-
-        <div className="row button-row">
-          <Link to="/adminPortal">
-            <button className="btn backbtn btn-display mt-3 ">Back</button>
-          </Link>
-
-          <Link to={`/add-member/${this.state.userId}`}>
-            <button className="btn backbtn btn-display mt-3 ">
-              Add Member
+        <div className="row search-age">
+          <div className="col-md-4">
+            <input
+              className="age"
+              type="number"
+              placeholder="Age 1"
+              value={this.state.start}
+              onChange={this.ChangeStartAge}
+            />
+          </div>
+          <div className="col-md-4">
+            <input
+              className="age"
+              type="number"
+              placeholder="Age 2"
+              value={this.state.end}
+              onChange={this.ChangeEndAge}
+            />
+          </div>
+          <div className="col-md-4">
+            <button
+              className="btn btn-display mt-3"
+              type="submit"
+              onClick={this.SearchByAge}
+            >
+              Search
             </button>
-          </Link>
-
-          <button
-            className="btn btn-display  w-auto mt-4"
-            style={{ marginLeft: "700px", height: "50px" }}
-            onClick={this.logOut}
-          >
-            Log Out
-          </button>
+          </div>
         </div>
-
-        <div className="row m-3">
+        <h1 className="text-center text-capitalize title">
+          All Member Details
+        </h1>
+        <Link to="/adminPortal">
+          <button className="btn backbtn btn-display mt-3 ">Back</button>
+        </Link>
+        <div className="row m-3 mt-5">
           <table class="table table-striped table-bordered table-hover table-md table-responsive">
             <thead className="thead-dark" style={{ whiteSpace: "nowrap" }}>
               <tr class="table-primary">
@@ -76,7 +100,7 @@ class FamilyMemberList extends Component {
                 <th>State</th>
               </tr>
             </thead>
-            <tbody className="table-info text-center">
+            <tbody className="table-dark text-center">
               {this.state.members.map((m) => (
                 <tr key={m.memberId}>
                   <th scope="row">{m.memberId}</th>
@@ -106,4 +130,4 @@ class FamilyMemberList extends Component {
   }
 }
 
-export default FamilyMemberList;
+export default SearchByAge;
