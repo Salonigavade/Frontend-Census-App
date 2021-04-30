@@ -19,11 +19,6 @@
   box-shadow: 0 8px 26px 0 rgba(0, 0, 0, 0.2);
 }
 
-h5.card-title {
-  text-align: center;
-  padding-bottom: 10px;
-}
-
 a.btn.btn-primary {
   margin: 30px 70px;
 }
@@ -90,7 +85,7 @@ h3 {
   font-family: emoji;
 }
 .searchbar {
-  width: 350px !important;
+  width: 300px !important;
   /* margin-left: -110px; */
 }
 

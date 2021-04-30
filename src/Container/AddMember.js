@@ -25,7 +25,7 @@ class AddMember extends Component {
       state: "",
     };
 
-    this.onChangeFullNameHandler = this.onChangeFullNameHandler.bind(this);
+    // this.onChangeFullNameHandler = this.onChangeFullNameHandler.bind(this);
   }
 
   onClickAddMember = (e) => {

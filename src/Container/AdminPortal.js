@@ -10,9 +10,12 @@ class AdminPortal extends Component {
       //   userId: "",
       //   emailId: "",
       //   mobile: "",
-      isloaded: false,
       user: [],
+      searchText: "",
     };
+    this.onClickGetUser = this.onClickGetUser.bind(this);
+    this.showAllMemberClick = this.showAllMemberClick.bind(this);
+    this.SearchUserById = this.SearchUserById.bind(this);
   }
 
   componentDidMount() {
@@ -21,11 +24,27 @@ class AdminPortal extends Component {
     });
   }
 
+  onClickGetUser = (userId) => {
+    this.props.history.push(`/members-by-userId/${userId}`);
+  };
+
+  showAllMemberClick = () => {
+    this.props.history.push(`/all-members`);
+  };
+
+  SearchUserById = (seachText) => {
+    this.props.history.push(`/user-by-userId/${seachText}`);
+  };
+
+  changeSearchText = (e) => {
+    this.setState({ searchText: e.target.value });
+  };
+
   render() {
     return (
       <>
         <div className="row top">
-          <div className="col-md-6 d-flex ">
+          <div className="col-md-5 d-flex ">
             <div className="home ml-4 mr-2">
               <h3>Home</h3>
             </div>
@@ -36,18 +55,32 @@ class AdminPortal extends Component {
               <h3>About</h3>
             </div>
           </div>
-          <div className="col-md-6 p-0">
+          <div className="col-md-5 p-0">
             <form class="form-inline mr-auto mb-4">
               <input
                 class="form-control searchbar"
                 type="text"
                 placeholder="Search"
                 aria-label="Search"
+                value={this.state.searchText}
+                onChange={this.changeSearchText}
               />
-              <button class="btn bg-danger btn-rounded" type="submit">
+              <button
+                class="btn bg-danger btn-rounded"
+                type="submit"
+                onClick={() => this.SearchUserById(this.state.searchText)}
+              >
                 Search
               </button>
             </form>
+          </div>
+          <div className="col-md-2">
+            <button
+              className="btn btn-sm-1 btn-info mt-4"
+              onClick={this.showAllMemberClick}
+            >
+              Show All
+            </button>
           </div>
         </div>
         <div>
@@ -58,20 +91,27 @@ class AdminPortal extends Component {
           .map((u) => (
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">{u.userId}</h5>
+                <h4 className="card-title text-center pb-1">{u.userId}</h4>
+                <hr />
                 <div className="card-text">
                   <div className="row">
-                    <label>EmailId</label>&nbsp;&nbsp;
+                    <label className="font-weight-bold">Email :</label>
+                    &nbsp;&nbsp;
                     <div> {u.emailId}</div>
                   </div>
                   <div className="row">
-                    <label>Mobile No</label>&nbsp;&nbsp;
+                    <label className="font-weight-bold">Mobile No :</label>
+                    &nbsp;&nbsp;
                     <div> {u.mobile}</div>
                   </div>
                 </div>
-                <a href="#" className="btn btn-primary">
+                <hr />
+                <button
+                  className="btn btn-primary ml-5"
+                  onClick={() => this.onClickGetUser(u.userId)}
+                >
                   show Details
-                </a>
+                </button>
               </div>
             </div>
           ))}
