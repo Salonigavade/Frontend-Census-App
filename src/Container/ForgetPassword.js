@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "../Container/ForgetPassword.css";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import UserService from "../Service/UserService";
+import { Link } from 'react-router-dom';
+
 
 class ForgetPassword extends Component {
   constructor(props) {
@@ -11,14 +14,49 @@ class ForgetPassword extends Component {
       emailId: "",
       newPassword: "",
     };
+
+
+    this.onChangeUserId=this.onChangeUserId.bind(this);
+    this.onChangeEmailId=this.onChangeEmailId.bind(this);
+    this.onChangeNewPassword=this.onChangeNewPassword.bind(this);
+
+  }
+
+  onChangeUserId= (e) =>{
+    this.setState({userId:e.target.value});
+  }
+
+  onChangeEmailId= (e) =>{
+    this.setState({emailId:e.target.value});
+  }
+
+  onChangeNewPassword= (e) =>{
+    this.setState({newPassword:e.target.value});
+  }
+
+
+
+  onClickForgetPass = (e) => {
+    e.preventDefault();
+
+    let user={
+      userId: this.state.userId,
+      emailId: this.state.emailId,
+      newPassword: this.state.newPassword,
+    }
+
+    UserService.forgetPassword(user)
+    .then((res)=>{
+      alert("password changed successfully");
+    })
   }
 
   render() {
     return (
       <>
         <div className="container-fluid fpass-container">
-          <div className="registration-form">
-            <form>
+          <div className="registration-form forgetPasswordForm">
+            <form className="forgetPass">
               <div className="form-icon">
                 <div className="usericon">
                   {/* <i className="icon icon-user"></i> */}
@@ -26,8 +64,9 @@ class ForgetPassword extends Component {
                   <AccountCircleIcon />
                 </div>
               </div>
-              <div className="row input-row">
+              <div className="row input-row-forget">
                 <input
+                className="forgetInput"
                   type="text"
                   placeholder="Adhar Card No"
                   name="userId"
@@ -37,15 +76,17 @@ class ForgetPassword extends Component {
                 />
 
                 <input
+                 className="forgetInput"
                   type="text"
                   placeholder="Email ID"
                   name="emailId"
                   onChange={this.onChangeEmailId}
                   value={this.state.emailId}
-                  placeholder="Enter Adhar No"
+                  placeholder="Enter Email Id"
                 />
 
                 <input
+                 className="forgetInput"
                   type="password"
                   placeholder="Enter New Password"
                   name="newPassword"
@@ -54,9 +95,14 @@ class ForgetPassword extends Component {
                 />
 
                 <div className="form-group">
-                  <button type="button" className="btn fpassbtn">
+                  <button type="button" className="btn fpassbtn" onClick={this.onClickForgetPass}>
                     Forget Password
                   </button>
+                  <Link to="/">
+                  <button type="button" className="btn backBtn">
+                    Back
+                  </button>
+                  </Link>
                 </div>
               </div>
             </form>
