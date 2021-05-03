@@ -6,7 +6,9 @@ class MemberService {
   addMember(userId, member) {
     return axios.post(BASE_URL + "add-member/" + userId, member);
   }
-
+  updateMember(memberId, member) {
+    return axios.put(BASE_URL + "update/" + memberId, member);
+  }
   getMembersByUserId(userId) {
     return axios.get(BASE_URL + "memberByUserId/" + userId);
   }
@@ -39,7 +41,9 @@ class MemberService {
   getMembersBetAges(start, end) {
     return axios.get(BASE_URL + "searchBetweenAges/" + start + "/" + end);
   }
-  searchBetweenAges;
+  deleteMember(memberId) {
+    return axios.delete(BASE_URL + "delete/" + memberId);
+  }
 }
 
 export default new MemberService();

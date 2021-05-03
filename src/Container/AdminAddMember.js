@@ -4,7 +4,7 @@ import MemberService from "../Service/MemberService";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-class AddMember extends Component {
+class AdminAddMember extends Component {
   constructor(props) {
     super(props);
 
@@ -153,7 +153,7 @@ class AddMember extends Component {
     MemberService.addMember(this.state.userId, member)
       .then((res) => {
         alert("Member Added Successful");
-        this.props.history.push(`/userPortal/${this.state.userId}`);
+        this.props.history.push(`/members-by-userId/${this.state.userId}`);
       })
       .catch((res) => {
         alert("unable to add details");
@@ -318,7 +318,7 @@ class AddMember extends Component {
                     <div class="fieldgroup paraField">
                       <p>Marrital Status: </p>
                     </div>
-                    <div class="fieldgroup">
+                    <div class="fieldgroup ml-lg-1">
                       <input
                         type="radio"
                         name="marritalStatus"
@@ -416,7 +416,7 @@ class AddMember extends Component {
                   Add Member
                 </button>
 
-                <Link to={`/userPortal/${this.state.userId}`}>
+                <Link to={`/members-by-userId/${this.state.userId}`}>
                   <button class="button btn btn-display mt-3 ml-0 w-auto">
                     <i class="fas fa-arrow-alt-circle-left fa-2x "></i>
                   </button>
@@ -430,4 +430,4 @@ class AddMember extends Component {
   }
 }
 
-export default AddMember;
+export default AdminAddMember;

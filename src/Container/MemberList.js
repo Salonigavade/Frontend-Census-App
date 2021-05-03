@@ -63,6 +63,15 @@ class MemberList extends Component {
       console.log(this.state.members);
     });
   }
+  delete(memberId) {
+    MemberService.deleteMember(memberId).then((res) => {
+      this.setState({
+        members: this.state.members.filter((mem) => mem.memberId !== memberId),
+      });
+      this.props.history.push("/all-members");
+      alert("Deleted record successfully!");
+    });
+  }
   render() {
     return (
       <>
@@ -94,17 +103,17 @@ class MemberList extends Component {
                   <option value="District">Search By District</option>
                   <option value="Gender">Search By Gender</option>
                 </select>
+                <button
+                  className="btn btn-display w-auto"
+                  type="submit"
+                  onClick={() => this.searchClick(this.state.selectValue)}
+                >
+                  <i class="fas fa-search fa-lg"></i>
+                </button>
               </div>
             </div>
           </div>
           <div className="col-md-4 pt-2">
-            <button
-              className="btn btn-display"
-              type="submit"
-              onClick={() => this.searchClick(this.state.selectValue)}
-            >
-              Search
-            </button>
             <Link to="/search-bet-age/">
               <button className="btn btn-display ml-5">Search By Age</button>
             </Link>
@@ -115,7 +124,9 @@ class MemberList extends Component {
           All Member Details
         </h1>
         <Link to="/adminPortal">
-          <button className="btn backbtn btn-display mt-3 ">Back</button>
+          <button class="button btn btn-display mt-3  ml-5 w-auto">
+            <i class="fas fa-arrow-alt-circle-left fa-lg "></i>
+          </button>
         </Link>
         <div className="row m-3 mt-3">
           <table class="table table-striped table-bordered table-hover table-md table-responsive">
@@ -138,6 +149,9 @@ class MemberList extends Component {
                 <th>Pincode</th>
                 <th>District</th>
                 <th>State</th>
+                <th colSpan="3" style={{ textAlign: "center" }}>
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="table-dark text-center">
@@ -160,6 +174,41 @@ class MemberList extends Component {
                   <td>{m.pinCode}</td>
                   <td>{m.district}</td>
                   <td>{m.state}</td>
+                  <td>
+                    <div className="actions">
+                      <Link to={`/update-member/${m.memberId}`}>
+                        <button
+                          id="margin"
+                          class="button btn btn-display w-auto"
+                        >
+                          <i class="fas fa-edit fa-lg "></i>
+                        </button>
+                      </Link>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="actions">
+                      <Link to={`/view-member/${m.memberId}`}>
+                        <button
+                          id="margin"
+                          class="button btn btn-display w-auto"
+                        >
+                          <i class="fas fa-eye fa-lg"></i>
+                        </button>
+                      </Link>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="actions">
+                      <button
+                        id="margin"
+                        class="button btn btn-display w-auto"
+                        onClick={() => this.delete(m.memberId)}
+                      >
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>

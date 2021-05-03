@@ -159,7 +159,7 @@ class LoginPage extends Component {
         if (login.role === "Admin") {
           this.props.history.push(`/adminPortal`);
         } else if (login.role === "User") {
-          this.props.history.push(`/members-by-userId/${login.userId}`);
+          this.props.history.push(`/userPortal/${login.userId}`);
         }
 
         console.log(JSON.stringify(login));

@@ -2,7 +2,7 @@
   /* display: block; */
   display: inline-block;
   width: 300px;
-  height: 250px;
+  height: 270px;
   margin: 50px 60px;
   border: 2px solid;
   box-shadow: 2px black;
@@ -108,7 +108,7 @@ h3 {
 }
 
 .btn-display {
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #ff4b2b, #fd3866);
   color: white;
   font-family: emoji;
 }

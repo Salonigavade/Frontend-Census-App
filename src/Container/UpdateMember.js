@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import "../Container/AddMember.css";
 import MemberService from "../Service/MemberService";
 import { Link } from "react-router-dom";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-
-class AddMember extends Component {
+import "./AddMember.css";
+class UpdateMember extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userId: this.props.match.params.userId,
+      memberId: this.props.match.params.memberId,
       fullName: "",
       motherName: "",
       dob: "",
@@ -25,6 +23,7 @@ class AddMember extends Component {
       pinCode: "",
       district: "",
       state: "",
+      userId: "",
     };
 
     this.onChangeFullNameHandler = this.onChangeFullNameHandler.bind(this);
@@ -53,6 +52,7 @@ class AddMember extends Component {
     this.onChangePinCodeHandler = this.onChangePinCodeHandler.bind(this);
     this.onChangeDistrictHandler = this.onChangeDistrictHandler.bind(this);
     this.onChangeStateHandler = this.onChangeStateHandler.bind(this);
+    this.updateMember = this.updateMember.bind(this);
   }
 
   onChangeFullNameHandler = (e) => {
@@ -127,7 +127,30 @@ class AddMember extends Component {
     this.setState({ state: e.target.value });
   };
 
-  onClickAddMember = (e) => {
+  componentDidMount() {
+    MemberService.getMembersByMemberId(this.state.memberId).then((res) => {
+      let member = res.data;
+      this.setState({
+        fullName: member.fullName,
+        motherName: member.motherName,
+        dob: member.dob,
+        gender: member.gender,
+        mobileNo: member.mobileNo,
+        adharCardNo: member.adharCardNo,
+        voterIdNo: member.voterIdNo,
+        nationality: member.nationality,
+        educationDetails: member.educationDetails,
+        marritalStatus: member.marritalStatus,
+        relationship: member.relationship,
+        city: member.city,
+        pinCode: member.pinCode,
+        district: member.district,
+        state: member.state,
+        userId: member.userId,
+      });
+    });
+  }
+  updateMember = (e) => {
     e.preventDefault();
 
     let member = {
@@ -148,18 +171,11 @@ class AddMember extends Component {
       state: this.state.state,
     };
 
-    console.log(member);
-
-    MemberService.addMember(this.state.userId, member)
-      .then((res) => {
-        alert("Member Added Successful");
-        this.props.history.push(`/userPortal/${this.state.userId}`);
-      })
-      .catch((res) => {
-        alert("unable to add details");
-      });
+    MemberService.updateMember(this.state.memberId, member).then((response) => {
+      this.props.history.push(`/userPortal/${this.state.userId}`);
+    });
+    alert("changed successfully");
   };
-
   render() {
     return (
       <>
@@ -167,9 +183,9 @@ class AddMember extends Component {
           <div className="registration-form ">
             <form>
               <div className="form-icon">
-                <div className="usericon">
-                  <AccountCircleIcon />
-                </div>
+                <span>
+                  <i className="icon icon-user"></i>
+                </span>
               </div>
               <div className="row input-row">
                 <div className="col-md-8">
@@ -411,13 +427,20 @@ class AddMember extends Component {
                 <button
                   type="button"
                   className="btn btn-block btn btn-display  create-account"
-                  onClick={this.onClickAddMember}
+                  onClick={this.updateMember}
                 >
-                  Add Member
+                  Update
                 </button>
-
+                {/* <Link to={`/members-by-userId/${this.state.userId}`}>
+                  <button
+                    type="button"
+                    className="btn btn-block create-account"
+                  >
+                    Back
+                  </button>
+                </Link> */}
                 <Link to={`/userPortal/${this.state.userId}`}>
-                  <button class="button btn btn-display mt-3 ml-0 w-auto">
+                  <button class="button btn btn-display mt-3 ml-0 w-50">
                     <i class="fas fa-arrow-alt-circle-left fa-2x "></i>
                   </button>
                 </Link>
@@ -430,4 +453,4 @@ class AddMember extends Component {
   }
 }
 
-export default AddMember;
+export default UpdateMember;

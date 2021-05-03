@@ -1,0 +1,9 @@
+.card.col-md-6.offset-md-3.card.view-card {
+  display: block;
+  margin: auto;
+  height: fit-content;
+  width: 460px;
+}
+.card-body.viewcard-body {
+  margin: 10px 0px 10px 70px;
+}

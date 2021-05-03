@@ -8,6 +8,7 @@ class FamilyMemberList extends Component {
     super(props);
     this.state = {
       members: [],
+      user: {},
       userId: this.props.match.params.userId,
     };
     this.logOut = this.logOut.bind(this);
@@ -18,6 +19,7 @@ class FamilyMemberList extends Component {
       console.log(this.state.members);
     });
   }
+
   logOut = (e) => {
     e.preventDefault();
     let logout = {
@@ -28,6 +30,14 @@ class FamilyMemberList extends Component {
       this.props.history.push("/");
     });
   };
+  delete(memberId) {
+    MemberService.deleteMember(memberId).then((res) => {
+      this.setState({
+        members: this.state.members.filter((mem) => mem.memberId !== memberId),
+      });
+      alert("Deleted record successfully!");
+    });
+  }
   render() {
     return (
       <>
@@ -35,21 +45,25 @@ class FamilyMemberList extends Component {
 
         <div className="row button-row">
           <Link to="/adminPortal">
-            <button className="btn backbtn btn-display mt-3 ">Back</button>
-          </Link>
-
-          <Link to={`/add-member/${this.state.userId}`}>
-            <button className="btn backbtn btn-display mt-3 ">
-              Add Member
+            <button class="button btn btn-display mt-3  ml-5 w-auto">
+              <i class="fas fa-arrow-alt-circle-left fa-lg "></i>
             </button>
           </Link>
 
+          <Link to={`/admin-add-member/${this.state.userId}`}>
+            <button
+              id="margin"
+              class="button btn btn-display mt-3  ml-5 w-auto"
+            >
+              <i class="fas fa-user-plus fa-lg"></i>
+            </button>
+          </Link>
           <button
             className="btn btn-display  w-auto mt-4"
-            style={{ marginLeft: "700px", height: "50px" }}
+            style={{ marginLeft: "940px", height: "50px" }}
             onClick={this.logOut}
           >
-            Log Out
+            <i class="fas fa-sign-out-alt fa-lg"></i>
           </button>
         </div>
 
@@ -74,9 +88,12 @@ class FamilyMemberList extends Component {
                 <th>Pincode</th>
                 <th>District</th>
                 <th>State</th>
+                <th colSpan="3" style={{ textAlign: "center" }}>
+                  Actions
+                </th>
               </tr>
             </thead>
-            <tbody className="table-info text-center">
+            <tbody className="table-dark text-center">
               {this.state.members.map((m) => (
                 <tr key={m.memberId}>
                   <th scope="row">{m.memberId}</th>
@@ -96,6 +113,41 @@ class FamilyMemberList extends Component {
                   <td>{m.pinCode}</td>
                   <td>{m.district}</td>
                   <td>{m.state}</td>
+                  <td>
+                    <div className="actions">
+                      <Link to={`/admin-update-member/${m.memberId}`}>
+                        <button
+                          id="margin"
+                          class="button btn btn-display w-auto"
+                        >
+                          <i class="fas fa-edit fa-lg "></i>
+                        </button>
+                      </Link>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="actions">
+                      <Link to={`/admin-view-member/${m.memberId}`}>
+                        <button
+                          id="margin"
+                          class="button btn btn-display w-auto"
+                        >
+                          <i class="fas fa-eye fa-lg"></i>
+                        </button>
+                      </Link>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="actions">
+                      <button
+                        id="margin"
+                        class="button btn btn-display w-auto"
+                        onClick={() => this.delete(m.memberId)}
+                      >
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
