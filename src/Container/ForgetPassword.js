@@ -53,8 +53,6 @@ class ForgetPassword extends Component {
             <form className="forgetPass">
               <div className="form-icon">
                 <div className="usericon">
-                  {/* <i className="icon icon-user"></i> */}
-                  {/* <i class="fa fa-user-circle-o" aria-hidden="true"></i> */}
                   <AccountCircleIcon />
                 </div>
               </div>

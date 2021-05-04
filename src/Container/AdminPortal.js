@@ -47,7 +47,9 @@ class AdminPortal extends Component {
           <div className="col-md-5 d-flex ">
             <div className="home ml-4 mr-2">
               <Link to="/">
-                <button className="btn-logout ">Log out</button>
+                <button class="button btn btn-display mt-4  ml-5 w-auto">
+                  <i class="fas fa-sign-out-alt fa-2x"></i>
+                </button>
               </Link>
             </div>
             <div className="contact ml-4 mr-2">
@@ -72,7 +74,7 @@ class AdminPortal extends Component {
                 type="submit"
                 onClick={() => this.SearchUserById(this.state.searchText)}
               >
-                Search
+                <i class="fas fa-search"></i>
               </button>
             </form>
           </div>
@@ -93,6 +95,7 @@ class AdminPortal extends Component {
           .map((u) => (
             <div className="card">
               <div className="card-body">
+                <h6 className="text-center text-muted">User ID</h6>
                 <h4 className="card-title text-center pb-1">{u.userId}</h4>
                 <hr />
                 <div className="card-text">

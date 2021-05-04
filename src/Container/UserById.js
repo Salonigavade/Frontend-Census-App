@@ -11,8 +11,6 @@ class UserById extends Component {
       user: {},
       userId: this.props.match.params.userId,
     };
-
-    // this.SearchUserById = this.SearchUserById.bind(this);
   }
 
   componentDidMount() {
@@ -20,10 +18,6 @@ class UserById extends Component {
       this.setState({ user: res.data });
     });
   }
-
-  onClickGetUser = (userId) => {
-    this.props.history.push(`/members-by-userId/${userId}`);
-  };
   render() {
     return (
       <>
@@ -47,13 +41,9 @@ class UserById extends Component {
                 </div>
               </div>
               <hr />
-              <button
-                className="btn btn-display ml-5"
-                onClick={() => this.onClickGetUser(this.state.user.userId)}
-              >
-                show Details
-              </button>
-
+              <Link to={`/members-by-userId/${this.state.user.userId}`}>
+                <button className="btn btn-display ml-5">show Details</button>
+              </Link>
               <Link to="/adminPortal">
                 <button className="btn backbtn btn-display  mt-4">Back</button>
               </Link>

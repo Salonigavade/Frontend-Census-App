@@ -16,6 +16,11 @@ import SearchByDistrict from "./Container/SearchByDistrict";
 import SearchByPinCode from "./Container/SearchByPinCode";
 import SearchByState from "./Container/SearchByState";
 import SearchByGender from "./Container/SearchByGender";
+import ViewMember from "./Container/ViewMember";
+import UpdateMember from "./Container/UpdateMember";
+import AdminViewMember from "./Container/AdminViewMember";
+import AdminUpdateMember from "./Container/AdminUpdateMember";
+import AdminAddMember from "./Container/AdminAddMember";
 
 function App() {
   return (
@@ -28,18 +33,14 @@ function App() {
             exact={true}
             component={ForgetPassword}
           />
-          <Route
-            path="/add-member/:userId"
-            exact={true}
-            component={AddMember}
-          />
+
           <Route path="/adminPortal" exact={true} component={AdminPortal} />
           <Route
             path="/user-by-userId/:userId"
             exact={true}
             component={UserById}
           />
-          <Route path="/adminPortal" exact={true} component={AdminPortal} />
+
           <Route
             path="/userPortal/:userId"
             exact={true}
@@ -52,7 +53,36 @@ function App() {
             component={FamilyMemberList}
           />
           <Route path="/all-members" exact={true} component={MemberList} />
-
+          <Route
+            path="/add-member/:userId"
+            exact={true}
+            component={AddMember}
+          />
+          <Route
+            path="/view-member/:memberId"
+            exact={true}
+            component={ViewMember}
+          />
+          <Route
+            path="/update-member/:memberId"
+            exact={true}
+            component={UpdateMember}
+          />
+          <Route
+            path="/admin-add-member/:userId"
+            exact={true}
+            component={AdminAddMember}
+          />
+          <Route
+            path="/admin-view-member/:memberId"
+            exact={true}
+            component={AdminViewMember}
+          />
+          <Route
+            path="/admin-update-member/:memberId"
+            exact={true}
+            component={AdminUpdateMember}
+          />
           <Route
             path="/search-by-memberId/:memberId"
             exact={true}

@@ -16,15 +16,22 @@ class SearchByMemberId extends Component {
       console.log(this.state.member);
     });
   }
-
+  delete(memberId) {
+    MemberService.deleteMember(memberId).then((res) => {
+      alert("Deleted record successfully!");
+      this.props.history.push("/all-members");
+    });
+  }
   render() {
     return (
       <>
         <h1 className="text-center text-capitalize title">
           All Member Details
         </h1>
-        <Link to="/adminPortal">
-          <button className="btn backbtn btn-display mt-3 ">Back</button>
+        <Link to="/all-members">
+          <button class="button btn btn-display mt-3  ml-5 w-auto">
+            <i class="fas fa-arrow-alt-circle-left fa-lg "></i>
+          </button>
         </Link>
         <div className="row m-3">
           <table class="table table-striped table-bordered table-hover table-md table-responsive">
@@ -47,6 +54,9 @@ class SearchByMemberId extends Component {
                 <th>Pincode</th>
                 <th>District</th>
                 <th>State</th>
+                <th colSpan="3" style={{ textAlign: "center" }}>
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="table-dark text-center">
@@ -68,6 +78,35 @@ class SearchByMemberId extends Component {
                 <td>{this.state.member.pinCode}</td>
                 <td>{this.state.member.district}</td>
                 <td>{this.state.member.state}</td>
+                <td>
+                  <div className="actions">
+                    <Link to={`/update-member/${this.state.member.memberId}`}>
+                      <button id="margin" class="button btn btn-display w-auto">
+                        <i class="fas fa-edit fa-lg "></i>
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+                <td>
+                  <div className="actions">
+                    <Link to={`/view-member/${this.state.member.memberId}`}>
+                      <button id="margin" class="button btn btn-display w-auto">
+                        <i class="fas fa-eye fa-lg"></i>
+                      </button>
+                    </Link>
+                  </div>
+                </td>
+                <td>
+                  <div className="actions">
+                    <button
+                      id="margin"
+                      class="button btn btn-display w-auto"
+                      onClick={() => this.delete(this.state.member.memberId)}
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

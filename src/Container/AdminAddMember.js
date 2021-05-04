@@ -4,7 +4,7 @@ import MemberService from "../Service/MemberService";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-class AddMember extends Component {
+class AdminAddMember extends Component {
   constructor(props) {
     super(props);
 
@@ -153,7 +153,7 @@ class AddMember extends Component {
     MemberService.addMember(this.state.userId, member)
       .then((res) => {
         alert("Member Added Successful");
-        this.props.history.push(`/userPortal/${this.state.userId}`);
+        this.props.history.push(`/members-by-userId/${this.state.userId}`);
       })
       .catch((res) => {
         alert("unable to add details");
@@ -181,7 +181,6 @@ class AddMember extends Component {
                       placeholder="Full Name"
                       value={this.state.fullName}
                       onChange={this.onChangeFullNameHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -194,7 +193,6 @@ class AddMember extends Component {
                       placeholder="Mother Name"
                       value={this.state.motherName}
                       onChange={this.onChangeMotherNameHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -209,7 +207,6 @@ class AddMember extends Component {
                       placeholder="Date of Birth"
                       value={this.state.dob}
                       onChange={this.onChangeDOBHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -225,7 +222,6 @@ class AddMember extends Component {
                         value="Male"
                         checked={this.state.gender === "Male"}
                         onChange={this.onRoleChangeMale}
-                        required
                       />
                       <label for="male">Male</label>
                     </div>
@@ -236,7 +232,6 @@ class AddMember extends Component {
                         value="Female"
                         checked={this.state.gender === "Female"}
                         onChange={this.onRoleChangeFemale}
-                        required
                       />
                       <label for="female">Female</label>
                     </div>
@@ -247,7 +242,6 @@ class AddMember extends Component {
                         value="Other"
                         checked={this.state.gender === "Other"}
                         onChange={this.onRoleChangeOther}
-                        required
                       />
                       <label for="other">Other</label>
                     </div>
@@ -264,7 +258,6 @@ class AddMember extends Component {
                       placeholder="Mobile No"
                       value={this.state.mobileNo}
                       onChange={this.onChangeMobileNoHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -277,7 +270,6 @@ class AddMember extends Component {
                       placeholder="Adhar Card No"
                       value={this.state.adharCardNo}
                       onChange={this.onChangeAdharCardNoHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -292,7 +284,6 @@ class AddMember extends Component {
                       placeholder="Voter Id No"
                       value={this.state.voterIdNo}
                       onChange={this.onChangeVoterIdNoHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -305,7 +296,6 @@ class AddMember extends Component {
                       placeholder="Nationality"
                       value={this.state.nationality}
                       onChange={this.onChangeNationalityHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -320,7 +310,6 @@ class AddMember extends Component {
                       placeholder="Education Details"
                       value={this.state.educationDetails}
                       onChange={this.onChangeEducationDetailsHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -336,7 +325,6 @@ class AddMember extends Component {
                         value="Married"
                         checked={this.state.marritalStatus === "Married"}
                         onChange={this.onChangeMarried}
-                        required
                       />
                       <label for="Married">Married</label>
                     </div>
@@ -346,7 +334,6 @@ class AddMember extends Component {
                         name="marritalStatus"
                         value="Unmarried"
                         onChange={this.onChangeUnmarried}
-                        required
                       />
                       <label for="Unmarried">Unmarried</label>
                     </div>
@@ -363,7 +350,6 @@ class AddMember extends Component {
                       placeholder="Relationship"
                       value={this.state.relationship}
                       onChange={this.onChangeRelationshipHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -376,7 +362,6 @@ class AddMember extends Component {
                       placeholder="City"
                       value={this.state.city}
                       onChange={this.onChangeCityHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -391,7 +376,6 @@ class AddMember extends Component {
                       placeholder="Pin Code"
                       value={this.state.pinCode}
                       onChange={this.onChangePinCodeHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -404,7 +388,6 @@ class AddMember extends Component {
                       placeholder="District"
                       value={this.state.district}
                       onChange={this.onChangeDistrictHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -419,7 +402,6 @@ class AddMember extends Component {
                       placeholder="State"
                       value={this.state.state}
                       onChange={this.onChangeStateHandler}
-                      required
                     />
                   </div>
                 </div>
@@ -434,7 +416,7 @@ class AddMember extends Component {
                   Add Member
                 </button>
 
-                <Link to={`/userPortal/${this.state.userId}`}>
+                <Link to={`/members-by-userId/${this.state.userId}`}>
                   <button class="button btn btn-display mt-3 ml-0 w-auto">
                     <i class="fas fa-arrow-alt-circle-left fa-2x "></i>
                   </button>
@@ -448,4 +430,4 @@ class AddMember extends Component {
   }
 }
 
-export default AddMember;
+export default AdminAddMember;
