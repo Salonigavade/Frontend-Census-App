@@ -25,6 +25,8 @@ class AddMember extends Component {
       pinCode: "",
       district: "",
       state: "",
+      countAge: "",
+      isshow: false,
     };
 
     this.onChangeFullNameHandler = this.onChangeFullNameHandler.bind(this);
@@ -65,6 +67,13 @@ class AddMember extends Component {
 
   onChangeDOBHandler = (e) => {
     this.setState({ dob: e.target.value });
+    var today = new Date();
+    var dobdate = new Date(e.target.value);
+    var age = today.getFullYear() - dobdate.getFullYear();
+    console.log(age);
+    if (age >= 18) {
+      this.setState({ isshow: true });
+    }
   };
 
   onRoleChangeMale = (e) => {
@@ -181,6 +190,7 @@ class AddMember extends Component {
                       placeholder="Full Name"
                       value={this.state.fullName}
                       onChange={this.onChangeFullNameHandler}
+                      pattern="[A-Za-z]{5,}"
                       required
                     />
                   </div>
@@ -283,19 +293,35 @@ class AddMember extends Component {
                 </div>
               </div>
               <div className="row input-row">
-                <div className="col-md-8">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control item"
-                      name="voterIdNo"
-                      placeholder="Voter Id No"
-                      value={this.state.voterIdNo}
-                      onChange={this.onChangeVoterIdNoHandler}
-                      required
-                    />
+                {this.state.isshow ? (
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control item"
+                        name="voterIdNo"
+                        placeholder="Voter Id No"
+                        value={this.state.voterIdNo}
+                        onChange={this.onChangeVoterIdNoHandler}
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control item"
+                        name="voterIdNo"
+                        placeholder="Voter Id No"
+                        value={this.state.voterIdNo}
+                        onChange={this.onChangeVoterIdNoHandler}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="col-md-4">
                   <div className="form-group">
                     <input
