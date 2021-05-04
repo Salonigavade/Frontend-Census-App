@@ -44,7 +44,7 @@ class AdminPortal extends Component {
     return (
       <>
         <div className="row top">
-          <div className="col-md-5 d-flex ">
+          <div className="col-md-4 d-flex ">
             <div className="home ml-4 mr-2">
               <Link to="/">
                 <button class="button btn btn-display mt-4  ml-5 w-auto">
@@ -52,10 +52,10 @@ class AdminPortal extends Component {
                 </button>
               </Link>
             </div>
-            <div className="contact ml-4 mr-2">
+            <div className="contact ml-3 mr-2">
               <h3>Contact</h3>
             </div>
-            <div className="About ml-4 mr-2">
+            <div className="About ml-3 mr-2">
               <h3>About</h3>
             </div>
           </div>
@@ -78,13 +78,18 @@ class AdminPortal extends Component {
               </button>
             </form>
           </div>
-          <div className="col-md-2">
+          <div className="col-md-3">
             <button
               className="btn btn-primary mt-4 btn-display"
               onClick={this.showAllMemberClick}
             >
               Show All
             </button>
+            <Link to="/statistics">
+              <button class="button btn btn-display mt-4  ml-5 w-auto">
+                Statistics
+              </button>
+            </Link>
           </div>
         </div>
         <div>

@@ -21,6 +21,7 @@ import UpdateMember from "./Container/UpdateMember";
 import AdminViewMember from "./Container/AdminViewMember";
 import AdminUpdateMember from "./Container/AdminUpdateMember";
 import AdminAddMember from "./Container/AdminAddMember";
+import Statistics from "./Container/Statistics";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact={true} component={LoginPage} />
+          <Route path="/statistics" exact={true} component={Statistics} />
           <Route
             path="/forget-password"
             exact={true}
