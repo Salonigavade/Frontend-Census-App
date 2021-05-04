@@ -181,6 +181,7 @@ class AddMember extends Component {
                       placeholder="Full Name"
                       value={this.state.fullName}
                       onChange={this.onChangeFullNameHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -193,6 +194,7 @@ class AddMember extends Component {
                       placeholder="Mother Name"
                       value={this.state.motherName}
                       onChange={this.onChangeMotherNameHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -207,6 +209,7 @@ class AddMember extends Component {
                       placeholder="Date of Birth"
                       value={this.state.dob}
                       onChange={this.onChangeDOBHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -222,6 +225,7 @@ class AddMember extends Component {
                         value="Male"
                         checked={this.state.gender === "Male"}
                         onChange={this.onRoleChangeMale}
+                        required
                       />
                       <label for="male">Male</label>
                     </div>
@@ -232,6 +236,7 @@ class AddMember extends Component {
                         value="Female"
                         checked={this.state.gender === "Female"}
                         onChange={this.onRoleChangeFemale}
+                        required
                       />
                       <label for="female">Female</label>
                     </div>
@@ -242,6 +247,7 @@ class AddMember extends Component {
                         value="Other"
                         checked={this.state.gender === "Other"}
                         onChange={this.onRoleChangeOther}
+                        required
                       />
                       <label for="other">Other</label>
                     </div>
@@ -258,6 +264,7 @@ class AddMember extends Component {
                       placeholder="Mobile No"
                       value={this.state.mobileNo}
                       onChange={this.onChangeMobileNoHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -270,6 +277,7 @@ class AddMember extends Component {
                       placeholder="Adhar Card No"
                       value={this.state.adharCardNo}
                       onChange={this.onChangeAdharCardNoHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -284,6 +292,7 @@ class AddMember extends Component {
                       placeholder="Voter Id No"
                       value={this.state.voterIdNo}
                       onChange={this.onChangeVoterIdNoHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -296,6 +305,7 @@ class AddMember extends Component {
                       placeholder="Nationality"
                       value={this.state.nationality}
                       onChange={this.onChangeNationalityHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -310,6 +320,7 @@ class AddMember extends Component {
                       placeholder="Education Details"
                       value={this.state.educationDetails}
                       onChange={this.onChangeEducationDetailsHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -318,13 +329,14 @@ class AddMember extends Component {
                     <div class="fieldgroup paraField">
                       <p>Marrital Status: </p>
                     </div>
-                    <div class="fieldgroup">
+                    <div class="fieldgroup ml-lg-1">
                       <input
                         type="radio"
                         name="marritalStatus"
                         value="Married"
                         checked={this.state.marritalStatus === "Married"}
                         onChange={this.onChangeMarried}
+                        required
                       />
                       <label for="Married">Married</label>
                     </div>
@@ -334,6 +346,7 @@ class AddMember extends Component {
                         name="marritalStatus"
                         value="Unmarried"
                         onChange={this.onChangeUnmarried}
+                        required
                       />
                       <label for="Unmarried">Unmarried</label>
                     </div>
@@ -350,6 +363,7 @@ class AddMember extends Component {
                       placeholder="Relationship"
                       value={this.state.relationship}
                       onChange={this.onChangeRelationshipHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -362,6 +376,7 @@ class AddMember extends Component {
                       placeholder="City"
                       value={this.state.city}
                       onChange={this.onChangeCityHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -376,6 +391,7 @@ class AddMember extends Component {
                       placeholder="Pin Code"
                       value={this.state.pinCode}
                       onChange={this.onChangePinCodeHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -388,6 +404,7 @@ class AddMember extends Component {
                       placeholder="District"
                       value={this.state.district}
                       onChange={this.onChangeDistrictHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -402,6 +419,7 @@ class AddMember extends Component {
                       placeholder="State"
                       value={this.state.state}
                       onChange={this.onChangeStateHandler}
+                      required
                     />
                   </div>
                 </div>
