@@ -53,7 +53,9 @@ class AdminPortal extends Component {
               </Link>
             </div>
             <div className="contact ml-3 mr-2">
+            <Link to="/contact-us">
               <h3>Contact</h3>
+            </Link>
             </div>
             <div className="About ml-3 mr-2">
               <h3>About</h3>
@@ -64,7 +66,7 @@ class AdminPortal extends Component {
               <input
                 class="form-control searchbar"
                 type="text"
-                placeholder="Search"
+                placeholder="Search By UserID"
                 aria-label="Search"
                 value={this.state.searchText}
                 onChange={this.changeSearchText}

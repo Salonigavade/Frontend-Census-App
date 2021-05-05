@@ -22,6 +22,7 @@ import AdminViewMember from "./Container/AdminViewMember";
 import AdminUpdateMember from "./Container/AdminUpdateMember";
 import AdminAddMember from "./Container/AdminAddMember";
 import Statistics from "./Container/Statistics";
+import ContactUs from "./Container/ContactUs";
 
 function App() {
   return (
@@ -122,6 +123,8 @@ function App() {
             component={SearchByGender}
           />
           <Route path="/search-bet-age/" exact={true} component={SearchByAge} />
+          <Route path="/contact-us/:userId" exact={true} component={ContactUs} />
+
         </Switch>
       </BrowserRouter>
     </>

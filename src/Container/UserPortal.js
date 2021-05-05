@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import MemberService from "../Service/MemberService";
 import { Link } from "react-router-dom";
 import UserService from "../Service/UserService";
+import "../Container/UserPortal.css";
+
 class UserPortal extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,22 @@ class UserPortal extends Component {
   render() {
     return (
       <>
+        <div className="row top">
+          <div className="col-md-3 ">
+            <h3 className="user-link">About Us</h3>
+          </div>
+          <div className="col-md-3 ">
+          <h3 className="user-link">Act & Rules</h3>
+          </div>
+          <div className="col-md-3 ">
+          <h3 className="user-link">Census Organization</h3>
+          </div>
+          <div className="col-md-3 ">
+          <Link to={`/contact-us/${this.state.userId}`}>
+            <h3 className="user-link">Contact Us</h3>
+          </Link>
+          </div>
+        </div>
         <h1 className="text-center text-capitalize title">User Portal</h1>
 
         <div className="row button-row">
