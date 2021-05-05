@@ -25,8 +25,7 @@ import Statistics from "./Container/Statistics";
 import About from "./Component/About";
 import ActAndRules from "./Component/ActAndRules";
 import CensusOrganization from "./Component/CensusOrganization";
-
-
+import ContactUs from "./Component/ContactUs";
 
 function App() {
   return (
@@ -34,13 +33,18 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact={true} component={LoginPage} />
-          <Route path="/act-and-rules" exact={true} component={ActAndRules} />
           <Route
-            path="/census-org"
+            path="/act-and-rules/:userId"
+            exact={true}
+            component={ActAndRules}
+          />
+          <Route
+            path="/census-org/:userId"
             exact={true}
             component={CensusOrganization}
           />
-          <Route path="/about" exact={true} component={About} />
+          <Route path="/about/:userId" exact={true} component={About} />
+          <Route path="/contact/:userId" exact={true} component={ContactUs} />
           <Route path="/statistics" exact={true} component={Statistics} />
           <Route
             path="/forget-password"
@@ -134,8 +138,11 @@ function App() {
             component={SearchByGender}
           />
           <Route path="/search-bet-age/" exact={true} component={SearchByAge} />
-          <Route path="/contact-us/:userId" exact={true} component={ContactUs} />
-
+          <Route
+            path="/contact-us/:userId"
+            exact={true}
+            component={ContactUs}
+          />
         </Switch>
       </BrowserRouter>
     </>

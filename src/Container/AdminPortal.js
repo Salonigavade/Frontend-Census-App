@@ -7,9 +7,6 @@ class AdminPortal extends Component {
     super(props);
 
     this.state = {
-      //   userId: "",
-      //   emailId: "",
-      //   mobile: "",
       user: [],
       searchText: "",
     };
@@ -43,25 +40,17 @@ class AdminPortal extends Component {
   render() {
     return (
       <>
-        <div className="row top">
-          <div className="col-md-4 d-flex ">
-            <div className="home ml-4 mr-2">
+        <div className="row admin-top mb-2">
+          <div className="col-md-2 d-flex ">
+            <div className="home mr-3">
               <Link to="/">
                 <button class="button btn btn-display mt-4  ml-5 w-auto">
                   <i class="fas fa-sign-out-alt fa-2x"></i>
                 </button>
               </Link>
             </div>
-            <div className="contact ml-3 mr-2">
-            <Link to="/contact-us">
-              <h3>Contact</h3>
-            </Link>
-            </div>
-            <div className="About ml-3 mr-2">
-              <h3>About</h3>
-            </div>
           </div>
-          <div className="col-md-5 p-0">
+          <div className="col-md-6 p-0">
             <form class="form-inline mr-auto mb-4">
               <input
                 class="form-control searchbar"
@@ -72,7 +61,7 @@ class AdminPortal extends Component {
                 onChange={this.changeSearchText}
               />
               <button
-                class="btn  btn-primary btn-rounded btn-display"
+                class="btn  btn-primary btn-rounded btn-display w-25"
                 type="submit"
                 onClick={() => this.SearchUserById(this.state.searchText)}
               >
@@ -80,15 +69,15 @@ class AdminPortal extends Component {
               </button>
             </form>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-4">
             <button
-              className="btn btn-primary mt-4 btn-display"
+              className="btn btn-primary mt-4 mr-5 btn-display"
               onClick={this.showAllMemberClick}
             >
               Show All
             </button>
             <Link to="/statistics">
-              <button class="button btn btn-display mt-4  ml-5 w-auto">
+              <button class="button btn btn-display mt-4  mr-5 w-auto">
                 Statistics
               </button>
             </Link>
