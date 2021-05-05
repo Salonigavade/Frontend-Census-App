@@ -3,7 +3,11 @@ import "../Container/AddMember.css";
 import MemberService from "../Service/MemberService";
 import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-
+const validateForm = (errors) => {
+  let valid = true;
+  Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
+  return valid;
+};
 class AdminAddMember extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +29,14 @@ class AdminAddMember extends Component {
       pinCode: "",
       district: "",
       state: "",
+      countAge: "",
+      isshow: false,
+      errors: {
+        fullName: "",
+        motherName: "",
+        mobileNo: "",
+        adharCardNo: "",
+      },
     };
 
     this.onChangeFullNameHandler = this.onChangeFullNameHandler.bind(this);
@@ -56,15 +68,31 @@ class AdminAddMember extends Component {
   }
 
   onChangeFullNameHandler = (e) => {
-    this.setState({ fullName: e.target.value });
+    let errors = this.state.errors;
+    errors.fullName =
+      e.target.value.length < 5
+        ? "Full Name must be at least 5 characters long!"
+        : "";
+    this.setState({ errors, fullName: e.target.value });
   };
 
   onChangeMotherNameHandler = (e) => {
-    this.setState({ motherName: e.target.value });
+    let errors = this.state.errors;
+    errors.motherName =
+      e.target.value.length < 2
+        ? "Mother Name must be at least 2 characters long!"
+        : "";
+    this.setState({ errors, motherName: e.target.value });
   };
-
   onChangeDOBHandler = (e) => {
     this.setState({ dob: e.target.value });
+    var today = new Date();
+    var dobdate = new Date(e.target.value);
+    var age = today.getFullYear() - dobdate.getFullYear();
+    console.log(age);
+    if (age >= 18) {
+      this.setState({ isshow: true });
+    }
   };
 
   onRoleChangeMale = (e) => {
@@ -80,10 +108,20 @@ class AdminAddMember extends Component {
   };
 
   onChangeMobileNoHandler = (e) => {
-    this.setState({ mobileNo: e.target.value });
+    const mobregex = /[7-9]{1}[0-9]{9}/;
+    let errors = this.state.errors;
+    errors.mobileNo = mobregex.test(e.target.value)
+      ? ""
+      : "Mobile number is not valid! (e.g 9855443366)";
+    this.setState({ errors, mobileNo: e.target.value });
   };
 
   onChangeAdharCardNoHandler = (e) => {
+    const adharregex = /^\d{4}\s\d{4}\s\d{4}$/;
+    let errors = this.state.errors;
+    errors.adharCardNo = adharregex.test(e.target.value)
+      ? ""
+      : "adhar number is not valid! (e.g 1234 1234 1234)";
     this.setState({ adharCardNo: e.target.value });
   };
 
@@ -129,38 +167,44 @@ class AdminAddMember extends Component {
 
   onClickAddMember = (e) => {
     e.preventDefault();
+    if (validateForm(this.state.errors)) {
+      console.info("Valid Form");
+      let member = {
+        fullName: this.state.fullName,
+        motherName: this.state.motherName,
+        dob: this.state.dob,
+        gender: this.state.gender,
+        mobileNo: this.state.mobileNo,
+        adharCardNo: this.state.adharCardNo,
+        voterIdNo: this.state.voterIdNo,
+        nationality: this.state.nationality,
+        educationDetails: this.state.educationDetails,
+        marritalStatus: this.state.marritalStatus,
+        relationship: this.state.relationship,
+        city: this.state.city,
+        pinCode: this.state.pinCode,
+        district: this.state.district,
+        state: this.state.state,
+      };
 
-    let member = {
-      fullName: this.state.fullName,
-      motherName: this.state.motherName,
-      dob: this.state.dob,
-      gender: this.state.gender,
-      mobileNo: this.state.mobileNo,
-      adharCardNo: this.state.adharCardNo,
-      voterIdNo: this.state.voterIdNo,
-      nationality: this.state.nationality,
-      educationDetails: this.state.educationDetails,
-      marritalStatus: this.state.marritalStatus,
-      relationship: this.state.relationship,
-      city: this.state.city,
-      pinCode: this.state.pinCode,
-      district: this.state.district,
-      state: this.state.state,
-    };
+      console.log(member);
 
-    console.log(member);
-
-    MemberService.addMember(this.state.userId, member)
-      .then((res) => {
-        alert("Member Added Successful");
-        this.props.history.push(`/members-by-userId/${this.state.userId}`);
-      })
-      .catch((res) => {
-        alert("unable to add details");
-      });
+      MemberService.addMember(this.state.userId, member)
+        .then((res) => {
+          alert("Member Added Successful");
+          this.props.history.push(`/members-by-userId/${this.state.userId}`);
+        })
+        .catch((res) => {
+          alert("unable to add details");
+        });
+    } else {
+      alert("Please check data once again!!");
+      console.error("Invalid Form");
+    }
   };
 
   render() {
+    const { errors } = this.state;
     return (
       <>
         <div className="container add-container">
@@ -181,7 +225,11 @@ class AdminAddMember extends Component {
                       placeholder="Full Name"
                       value={this.state.fullName}
                       onChange={this.onChangeFullNameHandler}
+                      required
                     />
+                    {errors.fullName.length > 0 && (
+                      <span className="error">{errors.fullName}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-4">
@@ -193,7 +241,11 @@ class AdminAddMember extends Component {
                       placeholder="Mother Name"
                       value={this.state.motherName}
                       onChange={this.onChangeMotherNameHandler}
+                      required
                     />
+                    {errors.motherName.length > 0 && (
+                      <span className="error">{errors.motherName}</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -207,6 +259,7 @@ class AdminAddMember extends Component {
                       placeholder="Date of Birth"
                       value={this.state.dob}
                       onChange={this.onChangeDOBHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -222,6 +275,7 @@ class AdminAddMember extends Component {
                         value="Male"
                         checked={this.state.gender === "Male"}
                         onChange={this.onRoleChangeMale}
+                        required
                       />
                       <label for="male">Male</label>
                     </div>
@@ -232,6 +286,7 @@ class AdminAddMember extends Component {
                         value="Female"
                         checked={this.state.gender === "Female"}
                         onChange={this.onRoleChangeFemale}
+                        required
                       />
                       <label for="female">Female</label>
                     </div>
@@ -242,6 +297,7 @@ class AdminAddMember extends Component {
                         value="Other"
                         checked={this.state.gender === "Other"}
                         onChange={this.onRoleChangeOther}
+                        required
                       />
                       <label for="other">Other</label>
                     </div>
@@ -258,7 +314,11 @@ class AdminAddMember extends Component {
                       placeholder="Mobile No"
                       value={this.state.mobileNo}
                       onChange={this.onChangeMobileNoHandler}
+                      required
                     />
+                    {errors.mobileNo.length > 0 && (
+                      <span className="error">{errors.mobileNo}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-md-8">
@@ -270,23 +330,44 @@ class AdminAddMember extends Component {
                       placeholder="Adhar Card No"
                       value={this.state.adharCardNo}
                       onChange={this.onChangeAdharCardNoHandler}
+                      required
                     />
+                    {errors.adharCardNo.length > 0 && (
+                      <span className="error">{errors.adharCardNo}</span>
+                    )}
                   </div>
                 </div>
               </div>
               <div className="row input-row">
-                <div className="col-md-8">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control item"
-                      name="voterIdNo"
-                      placeholder="Voter Id No"
-                      value={this.state.voterIdNo}
-                      onChange={this.onChangeVoterIdNoHandler}
-                    />
+                {this.state.isshow ? (
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control item"
+                        name="voterIdNo"
+                        placeholder="Voter Id No"
+                        value={this.state.voterIdNo}
+                        onChange={this.onChangeVoterIdNoHandler}
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        className="form-control item"
+                        name="voterIdNo"
+                        placeholder="Voter Id No"
+                        value={this.state.voterIdNo}
+                        onChange={this.onChangeVoterIdNoHandler}
+                        disabled
+                      />
+                    </div>
+                  </div>
+                )}
                 <div className="col-md-4">
                   <div className="form-group">
                     <input
@@ -296,6 +377,7 @@ class AdminAddMember extends Component {
                       placeholder="Nationality"
                       value={this.state.nationality}
                       onChange={this.onChangeNationalityHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -310,6 +392,7 @@ class AdminAddMember extends Component {
                       placeholder="Education Details"
                       value={this.state.educationDetails}
                       onChange={this.onChangeEducationDetailsHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -325,6 +408,7 @@ class AdminAddMember extends Component {
                         value="Married"
                         checked={this.state.marritalStatus === "Married"}
                         onChange={this.onChangeMarried}
+                        required
                       />
                       <label for="Married">Married</label>
                     </div>
@@ -334,6 +418,7 @@ class AdminAddMember extends Component {
                         name="marritalStatus"
                         value="Unmarried"
                         onChange={this.onChangeUnmarried}
+                        required
                       />
                       <label for="Unmarried">Unmarried</label>
                     </div>
@@ -350,6 +435,7 @@ class AdminAddMember extends Component {
                       placeholder="Relationship"
                       value={this.state.relationship}
                       onChange={this.onChangeRelationshipHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -362,6 +448,7 @@ class AdminAddMember extends Component {
                       placeholder="City"
                       value={this.state.city}
                       onChange={this.onChangeCityHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -376,6 +463,7 @@ class AdminAddMember extends Component {
                       placeholder="Pin Code"
                       value={this.state.pinCode}
                       onChange={this.onChangePinCodeHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -388,6 +476,7 @@ class AdminAddMember extends Component {
                       placeholder="District"
                       value={this.state.district}
                       onChange={this.onChangeDistrictHandler}
+                      required
                     />
                   </div>
                 </div>
@@ -402,6 +491,7 @@ class AdminAddMember extends Component {
                       placeholder="State"
                       value={this.state.state}
                       onChange={this.onChangeStateHandler}
+                      required
                     />
                   </div>
                 </div>

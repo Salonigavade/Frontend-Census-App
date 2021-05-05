@@ -22,7 +22,11 @@ import AdminViewMember from "./Container/AdminViewMember";
 import AdminUpdateMember from "./Container/AdminUpdateMember";
 import AdminAddMember from "./Container/AdminAddMember";
 import Statistics from "./Container/Statistics";
-import ContactUs from "./Container/ContactUs";
+import About from "./Component/About";
+import ActAndRules from "./Component/ActAndRules";
+import CensusOrganization from "./Component/CensusOrganization";
+
+
 
 function App() {
   return (
@@ -30,6 +34,13 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact={true} component={LoginPage} />
+          <Route path="/act-and-rules" exact={true} component={ActAndRules} />
+          <Route
+            path="/census-org"
+            exact={true}
+            component={CensusOrganization}
+          />
+          <Route path="/about" exact={true} component={About} />
           <Route path="/statistics" exact={true} component={Statistics} />
           <Route
             path="/forget-password"
