@@ -35,18 +35,24 @@ class UserPortal extends Component {
       <>
         <div className="row top">
           <div className="col-md-3 ">
-            <h3 className="user-link">About Us</h3>
+            <Link to={`/about/${this.state.userId}`}>
+              <h3 className="user-link">About Us</h3>
+            </Link>
           </div>
           <div className="col-md-3 ">
-          <h3 className="user-link">Act & Rules</h3>
+            <Link to={`/act-and-rules/${this.state.userId}`}>
+              <h3 className="user-link">Act & Rules</h3>
+            </Link>
           </div>
           <div className="col-md-3 ">
-          <h3 className="user-link">Census Organization</h3>
+            <Link to={`/census-org/${this.state.userId}`}>
+              <h3 className="user-link">Census Organization</h3>
+            </Link>
           </div>
           <div className="col-md-3 ">
-          <Link to={`/contact-us/${this.state.userId}`}>
-            <h3 className="user-link">Contact Us</h3>
-          </Link>
+            <Link to={`/contact/${this.state.userId}`}>
+              <h3 className="user-link">Contact Us</h3>
+            </Link>
           </div>
         </div>
         <h1 className="text-center text-capitalize title">User Portal</h1>

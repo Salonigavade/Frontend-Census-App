@@ -2,7 +2,7 @@
   /* display: block; */
   display: inline-block;
   width: 300px;
-  height: 270px;
+  height: 300px;
   margin: 50px 60px;
   border: 2px solid;
   box-shadow: 2px black;
@@ -85,12 +85,12 @@ h3 {
   font-family: emoji;
 }
 .searchbar {
-  width: 300px !important;
+  width: 350px !important;
   border: 2px solid;
   /* margin-left: -110px; */
 }
 
-.row.top {
+.row.admin-top {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;

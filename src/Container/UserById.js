@@ -21,7 +21,7 @@ class UserById extends Component {
   render() {
     return (
       <>
-        <div className="row top ">
+        <div className="row topuser ">
           <div className="card usercard">
             <div className="card-body">
               <h4 className="card-title text-center pb-1">
