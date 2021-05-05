@@ -26,6 +26,8 @@ import About from "./Component/About";
 import ActAndRules from "./Component/ActAndRules";
 import CensusOrganization from "./Component/CensusOrganization";
 
+
+
 function App() {
   return (
     <>
@@ -132,6 +134,8 @@ function App() {
             component={SearchByGender}
           />
           <Route path="/search-bet-age/" exact={true} component={SearchByAge} />
+          <Route path="/contact-us/:userId" exact={true} component={ContactUs} />
+
         </Switch>
       </BrowserRouter>
     </>
