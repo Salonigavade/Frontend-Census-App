@@ -1,0 +1,15 @@
+.about-row {
+  text-align: center;
+  background-color: darkgrey;
+  margin: 20px 0px;
+  border: 2px solid;
+}
+.about-div {
+  display: block;
+  margin: auto;
+  width: 550px;
+}
+.link {
+  color: aliceblue;
+  text-decoration: revert;
+}

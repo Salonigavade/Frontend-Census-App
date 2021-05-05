@@ -64,7 +64,7 @@ class AdminPortal extends Component {
               <input
                 class="form-control searchbar"
                 type="text"
-                placeholder="Search"
+                placeholder="Search By UserID"
                 aria-label="Search"
                 value={this.state.searchText}
                 onChange={this.changeSearchText}
